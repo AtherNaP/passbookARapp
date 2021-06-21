@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "777928960093",
+    "project_id": "passbooksamkhok",
+    "storage_bucket": "passbooksamkhok.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777928960093:android:aea00fe52498502a7b85b4",
+        "android_client_info": {
+          "package_name": "com.example.passbookapps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "777928960093-ecml4pa0soove07073avveo4l346rs41.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_9Mk4NTs-7WtX-5D5DmdrJmw-tbE7PDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "777928960093-ecml4pa0soove07073avveo4l346rs41.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
