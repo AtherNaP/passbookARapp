@@ -6,7 +6,6 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:passbookapps/model/profile.dart';
 import 'package:passbookapps/screen/home.dart';
 import 'package:passbookapps/screen/register.dart';
-import 'package:passbookapps/screen/welcome.dart';
 
 @override
 // ignore: camel_case_types
