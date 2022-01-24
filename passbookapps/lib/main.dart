@@ -15,6 +15,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: login2());
+        home: login2(),
+        debugShowCheckedModeBanner: false,
+        );
   }
 }
+

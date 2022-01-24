@@ -3,6 +3,8 @@ import 'package:passbookapps/screen/checkin.dart';
 import 'package:passbookapps/screen/coupon.dart';
 import 'package:passbookapps/screen/maps.dart';
 import 'package:passbookapps/screen/profileuser.dart';
+import 'package:passbookapps/screen/AR.dart';
+
 
 class Home extends StatefulWidget {
   @override
@@ -17,6 +19,7 @@ class _HomeState extends State<Home> {
     checkin(),
     profileuser(),
     coupon(),
+    // qrscan(),
   ]; // to store tab view
 
   //Active Page (TAB)
@@ -36,9 +39,16 @@ class _HomeState extends State<Home> {
 
       // FAB button
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          setState(() {
+            
+          });
+          startScan(){
+
+          }
+        },
         child: Icon(
-          Icons.qr_code_scanner_sharp,
+          Icons.view_in_ar
         ),
         backgroundColor: Color(0xFF18583B),
       ),
@@ -72,7 +82,7 @@ class _HomeState extends State<Home> {
                               currentTab == 0 ? Color(0xFF18583B) : Colors.grey,
                         ),
                         Text(
-                          "แผนที่",
+                          "Maps",
                           style: TextStyle(
                               color: currentTab == 0
                                   ? Color(0xFF18583B)
@@ -98,7 +108,7 @@ class _HomeState extends State<Home> {
                               currentTab == 1 ? Color(0xFF18583B) : Colors.grey,
                         ),
                         Text(
-                          "จุดเช็คอิน",
+                          "Check In",
                           style: TextStyle(
                               color: currentTab == 1
                                   ? Color(0xFF18583B)
@@ -115,34 +125,8 @@ class _HomeState extends State<Home> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreen = profileuser();
-                        currentTab = 2;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.person,
-                          color:
-                              currentTab == 2 ? Color(0xFF18583B) : Colors.grey,
-                        ),
-                        Text(
-                          "โปรไฟล์",
-                          style: TextStyle(
-                              color: currentTab == 2
-                                  ? Color(0xFF18583B)
-                                  : Colors.grey),
-                        )
-                      ],
-                    ),
-                  ),
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-                      setState(() {
                         currentScreen = coupon();
-                        currentTab = 3;
+                        currentTab = 2;
                       });
                     },
                     child: Column(
@@ -151,10 +135,37 @@ class _HomeState extends State<Home> {
                         Icon(
                           Icons.card_giftcard,
                           color:
+                              currentTab == 2 ? Color(0xFF18583B) : Colors.grey,
+                        ),
+                        Text(
+                          "Coupon",
+                          style: TextStyle(
+                              color: currentTab == 2
+                                  ? Color(0xFF18583B)
+                                  : Colors.grey),
+                        )
+                  
+                      ],
+                    ),
+                  ),
+                 MaterialButton(
+                    minWidth: 40,
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = profileuser();
+                        currentTab = 3;
+                      });
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.person,
+                          color:
                               currentTab == 3 ? Color(0xFF18583B) : Colors.grey,
                         ),
                         Text(
-                          "คูปอง",
+                          "Profile",
                           style: TextStyle(
                               color: currentTab == 3
                                   ? Color(0xFF18583B)

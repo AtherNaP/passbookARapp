@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "777928960093",
-    "project_id": "passbooksamkhok",
-    "storage_bucket": "passbooksamkhok.appspot.com"
+    "project_number": "951716727494",
+    "project_id": "passbookapps-1ebc4",
+    "storage_bucket": "passbookapps-1ebc4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:777928960093:android:aea00fe52498502a7b85b4",
+        "mobilesdk_app_id": "1:951716727494:android:125925d0dff7d6407be5c7",
         "android_client_info": {
           "package_name": "com.example.passbookapps"
         }
       },
       "oauth_client": [
         {
-          "client_id": "777928960093-ecml4pa0soove07073avveo4l346rs41.apps.googleusercontent.com",
+          "client_id": "951716727494-028v4koj6hi3ej7kmjb5fnf3le7k8r0l.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA_9Mk4NTs-7WtX-5D5DmdrJmw-tbE7PDw"
+          "current_key": "AIzaSyDQoAE3y7p-I-s5597ep3nLlhB1jhdahUM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "777928960093-ecml4pa0soove07073avveo4l346rs41.apps.googleusercontent.com",
+              "client_id": "951716727494-028v4koj6hi3ej7kmjb5fnf3le7k8r0l.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

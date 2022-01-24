@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,14 @@ import 'login2.dart';
 // ignore: must_be_immutable
 class register extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
-  Profile profile = Profile(email: '', password: '');
+  Profile profile = Profile(email: '', password: '', user: '');
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
+
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+
+  // void addregister(String email, String password, String user) async {
+  //   await users.add({'email' : email,'password': password, 'username' : user}).then((value) => print('insert data to firebase successful'));
+  // }
 
   // This widget is the root of your application.
   @override
@@ -42,11 +49,7 @@ class register extends StatelessWidget {
                     gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [
-                    Color(0xFF18583B),
-                    Color(0xCC9DDDC0),
-                    Color(0xFF18583B)
-                  ],
+                  colors: [Colors.lightGreen, Colors.white, Colors.lightGreen],
                 )),
                 child: Scaffold(
                     backgroundColor: Colors.white.withOpacity(0.0),
@@ -60,6 +63,18 @@ class register extends StatelessWidget {
                       ),
 
                       // ส่วนหัวหัว REGISTER
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/images/logo.png',
+                              width: 100,
+                              height: 100,
+                            ),
+                          ],
+                        ),
+                      ),
 
                       Container(
                         child: Row(
@@ -68,7 +83,7 @@ class register extends StatelessWidget {
                             Text(
                               "REGISTER",
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontSize: 32,
                                   fontWeight: FontWeight.bold),
                             )
@@ -86,19 +101,42 @@ class register extends StatelessWidget {
                           child: Column(
                             children: [
                               Container(
+                                  //ช่่องใสUsernamre
                                   alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.black26,
-                                          blurRadius: 6,
-                                          offset: Offset(0, 2))
-                                    ],
-                                  ),
-                                  height: 52,
-                                  width: 310,
+                                  padding: EdgeInsets.only(right: 70, left: 70),
+                                  child: TextFormField(
+                                    validator: MultiValidator([
+                                      RequiredValidator(
+                                          errorText: "โปรดระบุชื่อของท่าน"),
+                                    ]),
+                                    style: TextStyle(color: Colors.black87),
+                                    onSaved: (User) {
+                                      profile.user = User!;
+                                    },
+                                    decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        contentPadding:
+                                            EdgeInsets.only(top: 14),
+                                        prefixIcon: Icon(
+                                          Icons.person,
+                                          color: Colors.green,
+                                        ),
+                                        hintText: 'Username',
+                                        hintStyle:
+                                            TextStyle(color: Colors.black38)),
+                                  )),
+                              SizedBox(
+                                height: 17,
+                              ),
+                              Container(
+                                  //ช่องใส่เมล
+                                  alignment: Alignment.center,
+                                  padding: EdgeInsets.only(right: 70, left: 70),
                                   child: TextFormField(
                                     validator: MultiValidator([
                                       RequiredValidator(
@@ -112,12 +150,17 @@ class register extends StatelessWidget {
                                       profile.email = email!;
                                     },
                                     decoration: InputDecoration(
-                                        border: InputBorder.none,
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
                                         contentPadding:
                                             EdgeInsets.only(top: 14),
                                         prefixIcon: Icon(
                                           Icons.email,
-                                          color: Color(0xFF18583B),
+                                          color: Colors.green,
                                         ),
                                         hintText: 'Email',
                                         hintStyle:
@@ -127,19 +170,9 @@ class register extends StatelessWidget {
                                 height: 17,
                               ),
                               Container(
+                                  //ช่องใส่รหัส
                                   alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.black26,
-                                          blurRadius: 6,
-                                          offset: Offset(0, 2))
-                                    ],
-                                  ),
-                                  height: 52,
-                                  width: 310,
+                                  padding: EdgeInsets.only(right: 70, left: 70),
                                   child: TextFormField(
                                     validator: RequiredValidator(
                                         errorText: "โปรดระบุ Password ของท่าน"),
@@ -149,12 +182,17 @@ class register extends StatelessWidget {
                                       profile.password = password!;
                                     },
                                     decoration: InputDecoration(
-                                        border: InputBorder.none,
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
                                         contentPadding:
                                             EdgeInsets.only(top: 14),
                                         prefixIcon: Icon(
                                           Icons.lock,
-                                          color: Color(0xFF18583B),
+                                          color: Colors.green,
                                         ),
                                         hintText: 'Password',
                                         hintStyle:
@@ -170,11 +208,17 @@ class register extends StatelessWidget {
                       Column(
                         children: [
                           SizedBox(
-                            width: 358,
+                            width: 300,
                             height: 47,
                             child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    primary: Color(0xFFFFFEFE)),
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        Colors.redAccent),
+                                    shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ))),
                                 onPressed: () async {
                                   if (formKey.currentState!.validate()) {
                                     formKey.currentState!.save();
@@ -195,7 +239,6 @@ class register extends StatelessWidget {
                                           return login2();
                                         }));
                                       });
-
                                       // ignore: unused_catch_clause
                                     } on FirebaseAuthException catch (e) {
                                       // ignore: unused_local_variable
@@ -216,13 +259,30 @@ class register extends StatelessWidget {
                                           gravity: ToastGravity.CENTER);
                                     }
                                   }
+                                  print('4');
+                                  print(profile.email);
+                                  print(profile.password);
+                                  print(profile.user);
+
+                                  FirebaseFirestore.instance
+                                      .collection('users')
+                                      .add({
+                                        'email': profile.email,
+                                        'password': profile.password,
+                                        'username': profile.user
+                                      })
+                                      .then((value) =>
+                                          print('insert data successful'))
+                                      .catchError((error) => print(
+                                          "Failed to merge data: $error"));
+                                  //await users.add({'email' : profile.email,'password': profile.password, 'username' : profile.user}).then((value) => print('insert data to firebase successful'));
                                 },
                                 child: Text(
                                   "REGISTER",
                                   style: TextStyle(
-                                      fontSize: 36,
+                                      fontSize: 24,
                                       fontWeight: FontWeight.bold,
-                                      color: Color(0xFF18553A)),
+                                      color: Colors.white),
                                 )),
                           ),
                         ],
@@ -232,11 +292,17 @@ class register extends StatelessWidget {
                       //ส่วนของปุ่มย้อนไปหน้า LOGIN
                       Column(children: [
                         SizedBox(
-                          width: 358,
+                          width: 300,
                           height: 47,
                           child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  primary: Color(0xFFA35B3B)),
+                              style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.white),
+                                  shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ))),
                               onPressed: () {
                                 Navigator.pushReplacement(
                                     context,
@@ -246,7 +312,9 @@ class register extends StatelessWidget {
                               child: Text(
                                 "Login",
                                 style: TextStyle(
-                                    fontSize: 36, fontWeight: FontWeight.bold),
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black),
                               )),
                         )
                       ]),
