@@ -69,7 +69,8 @@ class Body extends StatelessWidget {
                  }
                  return ListView.builder(itemCount: 1, itemBuilder: (context, index) {
                    return Container(child: Column(children: [
-                     Row(children: [
+                     Row(
+                       children: [
                        Text(snapshot.data!['username'].toString()),
                        Text(snapshot.data!['email'].toString())
                      ],)
