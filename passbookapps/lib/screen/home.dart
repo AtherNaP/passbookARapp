@@ -18,8 +18,8 @@ class _HomeState extends State<Home> {
     maps(),
     checkin(),
     profileuser(),
-    coupon(),
-    // qrscan(),
+    // coupon(),
+    // Arbody(),
   ]; // to store tab view
 
   //Active Page (TAB)
@@ -38,20 +38,20 @@ class _HomeState extends State<Home> {
       ),
 
       // FAB button
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     setState(() {
             
-          });
-          startScan(){
+      //     });
+      //     startScan(){
 
-          }
-        },
-        child: Icon(
-          Icons.view_in_ar
-        ),
-        backgroundColor: Color(0xFF18583B),
-      ),
+      //     }
+      //   },
+        // child: Icon(
+        //   Icons.view_in_ar
+        // ),
+        // backgroundColor: Color(0xFF18583B),
+      // ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
       //bottom App Bar
@@ -125,7 +125,7 @@ class _HomeState extends State<Home> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreen = coupon();
+                        // currentScreen =Arbody();
                         currentTab = 2;
                       });
                     },
@@ -133,12 +133,12 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Icon(
-                          Icons.card_giftcard,
+                          Icons.view_in_ar,
                           color:
                               currentTab == 2 ? Color(0xFF18583B) : Colors.grey,
                         ),
                         Text(
-                          "Coupon",
+                          "AR",
                           style: TextStyle(
                               color: currentTab == 2
                                   ? Color(0xFF18583B)

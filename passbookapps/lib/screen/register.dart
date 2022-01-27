@@ -18,6 +18,32 @@ class register extends StatelessWidget {
 
   CollectionReference users = FirebaseFirestore.instance.collection('users');
 
+  // void regadddata(String uidvalue) {
+  //   FirebaseFirestore.instance
+  //       .collection('users')
+  //       .add({
+  //         'email': profile.email,
+  //         'password': profile.password,
+  //         'username': profile.user,
+  //         'uid': uidvalue,
+  //       })
+  //       .then((value) => print('insert data successful'))
+  //       .catchError((error) => print("Failed to merge data: $error"));
+  // }
+
+  void regadddata(String uidvalue) async {
+    var firebaseUser = await FirebaseAuth.instance.currentUser;
+    FirebaseFirestore.instance.collection('users')
+    .doc(firebaseUser!.uid)
+    .set({
+      'email': profile.email,
+          'password': profile.password,
+          'username': profile.user,
+          'uid': uidvalue,
+    }).then((value) => print('insert data successful uid: $uidvalue'))
+        .catchError((error) => print("Failed to merge data: $error"));
+  }
+
   // void addregister(String email, String password, String user) async {
   //   await users.add({'email' : email,'password': password, 'username' : user}).then((value) => print('insert data to firebase successful'));
   // }
@@ -229,6 +255,7 @@ class register extends StatelessWidget {
                                               password: profile.password)
                                           .then((value) {
                                         formKey.currentState!.reset();
+                                        regadddata(value.user!.uid);
                                         Fluttertoast.showToast(
                                             msg: "สร้างบัญชีผู้ใช้เรียบร้อย",
                                             gravity: ToastGravity.CENTER);
@@ -264,17 +291,7 @@ class register extends StatelessWidget {
                                   print(profile.password);
                                   print(profile.user);
 
-                                  FirebaseFirestore.instance
-                                      .collection('users')
-                                      .add({
-                                        'email': profile.email,
-                                        'password': profile.password,
-                                        'username': profile.user
-                                      })
-                                      .then((value) =>
-                                          print('insert data successful'))
-                                      .catchError((error) => print(
-                                          "Failed to merge data: $error"));
+                                  
                                   //await users.add({'email' : profile.email,'password': profile.password, 'username' : profile.user}).then((value) => print('insert data to firebase successful'));
                                 },
                                 child: Text(

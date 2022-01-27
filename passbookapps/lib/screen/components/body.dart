@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:passbookapps/screen/login2.dart';
@@ -8,11 +10,30 @@ class Body extends StatelessWidget {
 
   CollectionReference tbtest = FirebaseFirestore.instance.collection('users');
 
-  void show_data(String user) {
-    FirebaseFirestore.instance
-    .collection('users')
-    .doc('7r7EI5Sqcxtdc699YlEY')
-    .update({'username' : user});
+  // void show_data(String user) {
+  //   FirebaseFirestore.instance
+  //       .collection('users')
+  //       .doc('7r7EI5Sqcxtdc699YlEY')
+  //       .update({'username': user});
+  // }
+
+  String myEmail = '';
+  String myuser = '';
+
+  show_data() async {
+    final firebaseUser = await FirebaseAuth.instance.currentUser;
+    if (firebaseUser != null)
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(firebaseUser.uid)
+          .get()
+          .then((ds) {
+        myEmail = ds.data()!['email'];
+        myuser = ds.data()!['username'];
+        print(myEmail);
+      }).catchError((e) {
+        print(e);
+      });
   }
 
   @override
@@ -29,53 +50,107 @@ class Body extends StatelessWidget {
                 fit: StackFit.expand,
                 children: [
                   CircleAvatar(
-                    backgroundImage: AssetImage("assets/images/logo.png"),
+                    backgroundImage: AssetImage("assets/images/profile.png"),
                   ),
-                  
                   SizedBox(
                     height: 46,
                     width: 46,
                     child: FlatButton(
-                        onPressed: () {}, child: Container(
-                        ) //camera.icon
+                        onPressed: () {}, child: Container() //camera.icon
                         ),
                   ),
                 ],
               ),
             ),
+            // SizedBox(height: 20),
+            // Container(
+            //   child: Column(
+            //     children: [
+            //       Text(
+            //         " " + myuser,
+            //         style: TextStyle(
+            //             color: Colors.black,
+            //             fontSize: 24,
+            //             fontWeight: FontWeight.w600),
+            //       )
+            //     ],
+            //   ),
+            // ),
             SizedBox(height: 20),
             Container(
+              //color: Colors.red,
+              height: 150,
+              child: FutureBuilder(
+                  future: show_data(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState != ConnectionState.done) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                    return Container(
                         child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text( 
-                              "test",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w600),
-                            )
+                            Icon(Icons.person_outline),
+                            Text(' Username : ' + myuser,
+                            style:TextStyle(
+                              color: Colors.black,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w600
+                            ) ,),
+                            
                           ],
                         ),
-                      ),
-            SizedBox(height: 20),
-             Container(
-               height: 150,
-               child: StreamBuilder(stream: FirebaseFirestore.instance.collection('users').doc('7r7EI5Sqcxtdc699YlEY').snapshots(), builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot){
-                 print(snapshot.data!.toString());
-                 if(!snapshot.hasData){
-                   return Center(child: CircularProgressIndicator());
-                 }
-                 return ListView.builder(itemCount: 1, itemBuilder: (context, index) {
-                   return Container(child: Column(children: [
-                     Row(children: [
-                       Text(snapshot.data!['username'].toString()),
-                       Text(snapshot.data!['email'].toString())
-                     ],)
-                   ],));
-                 });
-               }),
-                        
-                      ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            
+                            Icon(Icons.mail),
+                            Text('  email : ' + myEmail)
+                            ,],
+                        )
+                      ],
+                    ));
+                  }),
+                  
+
+              // StreamBuilder(
+              //     stream: FirebaseFirestore.instance
+              //         .collection('users')
+              //         .doc('')
+              //         .snapshots(),
+              //     builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+              //       print(snapshot.data!.toString());
+              //       if (!snapshot.hasData) {
+              //         return Center(child: CircularProgressIndicator());
+              //       }
+              //       return ListView.builder(
+              //           itemCount: 1,
+              //           itemBuilder: (context, index) {
+              //             return Container(
+              //                 child: Column(
+              //                   mainAxisAlignment: MainAxisAlignment.center,
+              //               children: [
+              //                 Row(
+              //                   mainAxisAlignment: MainAxisAlignment.center,
+              //                   children: [
+              //                     //Text('username : '+snapshot.data!['username'].toString()),
+              //                     Text('Email: '+myEmail)
+              //                   ],
+              //                 ),
+              //                 Row(
+              //                   mainAxisAlignment: MainAxisAlignment.center,
+              //                   children: [
+              //                   //Text('email : '+snapshot.data!['email'].toString())
+              //                 ],)
+              //               ],
+              //             ));
+              //           });
+              //     }),
+            ),
+            SizedBox(height: 100),
             Center(
                 child: Column(
               children: [
@@ -92,11 +167,11 @@ class Body extends StatelessWidget {
                     icon: Icons.logout,
                     press: () {
                       auth.signOut().then((value) {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) {
-                        return login2();
-                      }));
-                    });
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) {
+                          return login2();
+                        }));
+                      });
                     }),
               ],
             ))
@@ -120,21 +195,22 @@ class profilemenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: 30, vertical: 15), // ขนาดความใหญ่ยาว แถบเมนูปุ่ม
+          horizontal: 100, vertical: 15), // ขนาดความใหญ่ยาว แถบเมนูปุ่ม
       child: FlatButton(
         padding: EdgeInsets.all(15), // ขนาดแถบเมนูปุ่ม
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        color: Colors.white,
+        color: Colors.red[300],
         onPressed: press,
         child: Row(
           children: [
             Icon(
               icon,
-              color: Colors.green, //Color icon
+              color: Colors.black, //Color icon
             ),
-            SizedBox( // ตำแหน่งของข้อความในปุ่มเมนู
+            SizedBox(
+              // ตำแหน่งของข้อความในปุ่มเมนู
               width: 25,
-            ), 
+            ),
             Expanded(
                 child: Text(
               text,

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -181,7 +182,8 @@ class login2 extends StatelessWidget {
                                       await FirebaseAuth.instance
                                           .signInWithEmailAndPassword(
                                               email: profile.email,
-                                              password: profile.password)
+                                              password: profile.password,
+                                              )
                                           .then((value) {
                                         formKey.currentState!.reset();
                                         print(value.user!.uid);

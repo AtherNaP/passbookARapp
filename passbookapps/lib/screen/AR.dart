@@ -1,44 +1,76 @@
-// import 'package:flutter/material.dart';
-// import 'package:arcore_plugin/arcore_plugin.dart';
-// import 'package:vector_math/vector_math_64.dart' as vector;
+import 'package:flutter/material.dart';
+import 'package:ar_flutter_plugin/ar_flutter_plugin.dart';
+import 'package:vector_math/vector_math_64.dart' as vector;
 
+class Arbody extends StatefulWidget {
+  @override
+  _ArbodyState createState() => _ArbodyState();
+}
 
+class _ArbodyState extends State<Arbody> {
+  ArCoreController arCoreController;
 
-// class ARBody extends StatelessWidget {
-//   ArCoreViewController? arCoreViewController; 
+  @override
+  Widget build(BuildContext context) {
+   return Scaffold(
+     body: ArCoreView(
+        onArCoreViewCreated: _onArCoreViewCreated,
+     ),
+   );
+  }
+  void _onArCoreViewCreated(ArCoreController controller) {
+    arCoreController = controller;
+
+    _addSphere(arCoreController);
+    _addCylindre(arCoreController);
+    _addCube(arCoreController);
+  } 
+
+   void _addSphere(ArCoreController controller) {
+    final material = ArCoreMaterial(
+        color: Color.fromARGB(120, 66, 134, 244));
+    final sphere = ArCoreSphere(
+      materials: [material],
+      radius: 0.1,
+    );
+    final node = ArCoreNode(
+      shape: sphere,
+      position: vector.Vector3(0, 0, -1.5),
+    );
+    controller.addArCoreNode(node);
+  }
+  void _addCylindre(ArCoreController controller) {
+    final material = ArCoreMaterial(
+      color: Colors.red,
+      reflectance: 1.0,
+    );
+    final cylindre = ArCoreCylinder(
+      materials: [material],
+      radius: 0.5,
+      height: 0.3,
+    );
+    final node = ArCoreNode(
+      shape: cylindre,
+      position: vector.Vector3(0.0, -0.5, -2.0),
+    );
+    controller.addArCoreNode(node);
+  }
   
+  void _addCube(ArCoreController controller) {
+    final material = ArCoreMaterial(
+      color: Color.fromARGB(120, 66, 134, 244),
+      metallic: 1.0,
+    );
+    final cube = ArCoreCube(
+      materials: [material],
+      size: vector.Vector3(0.5, 0.5, 0.5),
+    );
+    final node = ArCoreNode(
+      shape: cube,
+      position: vector.Vector3(-0.5, 0.5, -3.5),
+    );
+    controller.addArCoreNode(node);
+  }
 
-//   _onArCoreViewCreated(ArCoreViewController _arcoreViewController){
-//     arCoreViewController=_arcoreViewController;
-//     _addSphere(_arcoreViewController);
-//   }
-
-//   _addSphere(ArCoreViewController _arCoreViewController){
-//     final material = ArCoreMaterial(color: Colors.deepOrange);
-//     final sphere = ArCoreSphere(materials: [material], radius: 0.2);           
-//     final node = ArCoreNode(
-//           shape: sphere,
-//           position: vector.Vector3(
-//            0,
-//            0,
-//           -1,
-//         ),            
-//     );
-
-//    _arcoreViewController.add(node);
-
-//   } 
-// @override
-// void dispose() {
-//  arCoreViewController.dispose();
-//   super.dispose();
-// }
-
-// @override
-// Widget build(BuildContext context){
-//   return Scaffold(
-//        body: ArCoreView(onArCoreViewCreated: _onArCoreViewCreated,),
-//   );
-// }
-// }
-
+  
+}
