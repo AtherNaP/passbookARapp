@@ -75,7 +75,9 @@ class register extends StatelessWidget {
                     gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [Colors.lightGreen, Colors.white, Colors.lightGreen],
+                  colors: [Colors.white, 
+                  Colors.white, 
+                  Colors.lightGreen],
                 )),
                 child: Scaffold(
                     backgroundColor: Colors.white.withOpacity(0.0),
@@ -94,9 +96,9 @@ class register extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(
-                              'assets/images/logo.png',
-                              width: 100,
-                              height: 100,
+                              'assets/images/logo2.jpg',
+                              width: 250,
+                              height: 181,
                             ),
                           ],
                         ),

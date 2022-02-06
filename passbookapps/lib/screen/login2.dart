@@ -44,7 +44,7 @@ class login2 extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.lightGreen,
+                    Colors.white,
                     Colors.white,
                     Colors.lightGreen
                   ],
@@ -67,8 +67,8 @@ class login2 extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(
-                              'assets/images/logo.png',
-                              width: 171,
+                              'assets/images/logo2.jpg',
+                              width: 250,
                               height: 181,
                             ),
                           ],
@@ -134,7 +134,7 @@ class login2 extends StatelessWidget {
                                  padding: EdgeInsets.only(right: 70,left: 70),
                                   child: TextFormField(
                                     validator: RequiredValidator(
-                                        errorText: "โปรดระบุ Password ของท่าน"),
+                                        errorText: "โปรดระบุรหัสผ่านของท่าน"),
                                     obscureText: true,
                                     style: TextStyle(color: Colors.black87),
                                     onSaved: (password) {
@@ -159,7 +159,10 @@ class login2 extends StatelessWidget {
                         ),
                       ),
                       Column(
-                        
+                        children: [
+                          SizedBox(height: 10,)
+                          
+                        ],
                       ),
 
                       //ส่วนของปุ่มกด Login
