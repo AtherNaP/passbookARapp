@@ -75,6 +75,6 @@ class _ArbodyState extends State<Arbody> {
   void dispose() {
     arCoreController.dispose();
     super.dispose();
-  
+  //
 }
 }
