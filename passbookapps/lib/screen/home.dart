@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
     checkin(),
     profileuser(),
     // coupon(),
-    // Arbody(),
+    Arbody(),
   ]; // to store tab view
 
   //Active Page (TAB)
@@ -125,7 +125,7 @@ class _HomeState extends State<Home> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        // currentScreen =Arbody();
+                        currentScreen =Arbody();
                         currentTab = 2;
                       });
                     },
