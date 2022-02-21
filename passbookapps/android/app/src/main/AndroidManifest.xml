@@ -35,7 +35,7 @@
               android:name="io.flutter.embedding.android.SplashScreenDrawable"
               android:resource="@drawable/launch_background"
               />
-            <meta-data android:name="com.google.ar.core" android:value="required" />
+            
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -47,5 +47,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        
     </application>
+    
 </manifest>
