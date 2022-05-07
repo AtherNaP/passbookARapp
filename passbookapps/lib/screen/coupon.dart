@@ -83,7 +83,7 @@ class _couponState extends State<coupon>
             width: double.infinity,
             child: TabBarView(controller: tabController,
             children: [
-              Gitf(),
+              // Gitf(),
               Drink(),
               Food(),
             ],),

@@ -70,34 +70,33 @@ class _mapsState extends State<maps> with SingleTickerProviderStateMixin {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            "Maps",
-            style: TextStyle(color: Colors.black),
+            "แผนที่ท่องเที่ยว",
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.lightGreen[300],
         ),
-        body: Center(
-          child: buildImage()
-          // Container(
-          //   child: InteractiveViewer(
-          //       transformationController: controller,
-          //       clipBehavior: Clip.none,
-          //       panEnabled: false,
-          //       minScale: minScale,
-          //       maxScale: maxScale,
-          //       onInteractionEnd: (details) {
-          //         resetAnimation();
-          //       },
-          //       child: AspectRatio(
-          //         aspectRatio: 1,
-          //         child: ClipRRect(
-          //             borderRadius: BorderRadius.circular(20),
-          //             child: Image.asset(
-          //                 'assets/images/260032222_311844533913555_3743807380163888560_n.png',
-          //                 fit: BoxFit.cover)),
-          //       )),
-          // ),
-        ),
+        body: Center(child: buildImage()
+            // Container(
+            //   child: InteractiveViewer(
+            //       transformationController: controller,
+            //       clipBehavior: Clip.none,
+            //       panEnabled: false,
+            //       minScale: minScale,
+            //       maxScale: maxScale,
+            //       onInteractionEnd: (details) {
+            //         resetAnimation();
+            //       },
+            //       child: AspectRatio(
+            //         aspectRatio: 1,
+            //         child: ClipRRect(
+            //             borderRadius: BorderRadius.circular(20),
+            //             child: Image.asset(
+            //                 'assets/images/260032222_311844533913555_3743807380163888560_n.png',
+            //                 fit: BoxFit.cover)),
+            //       )),
+            // ),
+            ),
       ),
     );
   }
@@ -118,7 +117,7 @@ class _mapsState extends State<maps> with SingleTickerProviderStateMixin {
           },
           onInteractionUpdate: (details) {
             if (entry == null) return;
-    
+
             this.scale = details.scale;
             entry!.markNeedsBuild();
           },
@@ -127,15 +126,13 @@ class _mapsState extends State<maps> with SingleTickerProviderStateMixin {
             resetAnimation();
           },
           child: //Container(),
-          AspectRatio(
+              AspectRatio(
             aspectRatio: 0.65,
             child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(
-                          'assets/images/123456789.png',
-                          fit: BoxFit.fill)),
-          )
-          ),
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset('assets/images/123456789.png',
+                    fit: BoxFit.fill)),
+          )),
     );
   }
 
