@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:passbookapps/screen/AR.dart';
 import 'package:passbookapps/screen/listview.dart';
 import 'package:passbookapps/screen/components/view.dart';
-import 'package:passbookapps/screen/coupon.dart';
+// import 'package:passbookapps/screen/coupon.dart';
 import 'package:passbookapps/screen/maps.dart';
-import 'package:passbookapps/screen/profileuser.dart';
-import 'package:passbookapps/screen/AR.dart';
+import 'package:passbookapps/screen/welcome.dart';
+// import 'package:passbookapps/screen/profileuser.dart';
+// import 'package:passbookapps/screen/AR.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -17,7 +19,7 @@ class _HomeState extends State<Home> {
   final List<Widget> screen = [
     maps(),
     listview(),
-    profileuser(),
+    // profileuser(),
     // coupon(),
     // Arbody(),
     viewbody()
@@ -25,7 +27,7 @@ class _HomeState extends State<Home> {
 
   //Active Page (TAB)
 
-  Widget currentScreen = maps(); // initial screen in viewport
+  Widget currentScreen =listAR(); // initial screen in viewport
   final PageStorageBucket bucket = PageStorageBucket();
 
   @override
